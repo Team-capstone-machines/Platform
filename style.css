@@ -1,0 +1,8 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+body h1{
+    color: red;
+}
