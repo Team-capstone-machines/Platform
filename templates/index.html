@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/style.css" type="text/css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/efects.js"></script>
+</head>
+<body class="main">
+    <div class="square">
+        <div>
+            <h1>Ficha Roja Interpol</h1>
+        </div>
+        <div>
+            <form action="#" method="POST">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nm" id="nombre" style="margin-left: 3px;"><br><br>
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" name="ap" id="apellidos" class="lname"><br><br>
+                <label for="sexo">Sexo:</label>
+                <input type="text" name="sx" id="sexo" style="margin-left: 30px;"><br><br>
+                <div>
+                    <button id="search" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+        <div class="response">
+            {% if req_success %}
+                {% for items in req_success['data'] %}
+                    <P><b>Nombre: </b>{{ items['nombre'] }}</P>
+                    <P><b>Apellidos: </b>{{ items['apellidos'] }}</P>
+                    <P><b>Fecha de Nacimiento: </b>{{ items['fechaNacimiento'] }}</P>
+                    <P><b>Altura: </b>{{ items['mas_info']['altura'] }}</P>
+                    <P><b>Sexo: </b>{{ items['mas_info']['sexo'] }}</P>
+                    <P><b>Lugar de Nacimiento: </b>{{ items['mas_info']['lugar_de_nacimiento'] }}</P>
+                    <P><b>Cargos: </b>{{ items['mas_info']['cargos'][0]['cargo'] }}</P>
+                    <br>
+                {% endfor %}
+            {% elif req_no_content %}
+                <p><b>Mensaje: </b>{{ req_no_content['message'] }}</p> 
+            {% endif %}
+        </div>
+        <div>
+            <button class="clear" type="button">Limpiar Registro</button>
+        </div>
+    </div>
+</body>
+</html>
